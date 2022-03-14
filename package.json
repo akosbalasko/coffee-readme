@@ -1,8 +1,8 @@
 {
-  "name": "typescript-action",
-  "version": "0.0.0",
+  "name": "coffee-readme",
+  "version": "0.0.1",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "This action grabs your messages written by your supporters on Buy Me A Coffee, and updates your Readme.md",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -25,19 +25,21 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.6.0"
+    "@actions/core": "1.6.0",
+    "@actions/github": "5.0.0",
+    "buymeacoffee.js": "1.2.2"
   },
   "devDependencies": {
-    "@types/node": "^16.10.5",
-    "@typescript-eslint/parser": "^5.8.1",
-    "@vercel/ncc": "^0.31.1",
-    "eslint": "^7.32.0",
-    "eslint-plugin-github": "^4.3.2",
-    "eslint-plugin-jest": "^25.3.2",
-    "jest": "^27.2.5",
-    "js-yaml": "^4.1.0",
+    "@types/node": "16.10.5",
+    "@typescript-eslint/parser": "5.8.1",
+    "@vercel/ncc": "0.31.1",
+    "eslint": "7.32.0",
+    "eslint-plugin-github": "4.3.2",
+    "eslint-plugin-jest": "25.3.2",
+    "jest": "27.2.5",
+    "js-yaml": "4.1.0",
     "prettier": "2.5.1",
-    "ts-jest": "^27.1.2",
-    "typescript": "^4.4.4"
+    "ts-jest": "27.1.2",
+    "typescript": "4.4.4"
   }
 }

@@ -1,11 +1,35 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Buy me a coffee messages -> Readme'
+author: 'Akos Balasko'
+description: ''
+
 inputs:
-  milliseconds: # change this
+  BUY-ME-A-COFFEE-TOKEN:  # id of input
+    description: 'Your Buy me a coffee token'
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+  
+  GH_TOKEN:
+    description: "GitHub access token with Repo scope"
+    default: ${{ github.token }}
+    required: true
+
+  REPOSITORY:
+    description: "Your GitHub repository"
+    default: ${{ github.repository }}
+    required: false
+
+  COMMIT_MESSAGE:
+    description: "Add a commit message of your choice"
+    default: "Buy me a Coffee messages updated"
+    required: false
+
+  number-of-messages: 
+    description: 'Number of the messages to show'
+    default: 3
+
 runs:
   using: 'node16'
-  main: 'dist/index.js'
+  main: 'index.js'
+
+branding:
+  icon: "info"
+  color: "blue"

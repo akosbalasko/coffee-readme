@@ -18,7 +18,8 @@ async function run(): Promise<void> {
     const coffee = new coffeeAPI(coffeeToken); // add your token here
     const supporters = await coffee.Supporters();
 
-    const octokit = github.getOctokit(coffeeToken);
+    const octoToken = core.getInput('GH-TOKEN');
+    const octokit = github.getOctokit(octoToken);
     const readme = await octokit.rest.repos.getReadme({ owner: repo.split('/')[0], repo: repo.split('/')[1]});
     const decodedReadme = readme.data.content;
     const options = getActionOptions();

@@ -22,9 +22,14 @@ inputs:
     default: "Buy me a Coffee messages updated"
     required: false
 
-  number-of-messages: 
+  NUMBER-OF-MESSAGES: 
     description: 'Number of the messages to show'
     default: 3
+
+  BRANCH:
+    description: 'Branch to be updated'
+    default: main
+
 
 runs:
   using: 'node16'

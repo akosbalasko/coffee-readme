@@ -271,11 +271,11 @@ function getPathsToUpdate() {
 }
 exports.getPathsToUpdate = getPathsToUpdate;
 function getActionOptions() {
-    const token = (0, core_1.getInput)('github-token', { required: true });
-    const message = (0, core_1.getInput)('commit-msg', { required: true });
-    const branch = (0, core_1.getInput)('branch');
-    const committerName = (0, core_1.getInput)('committer-name');
-    const committerEmail = (0, core_1.getInput)('committer-email');
+    const token = (0, core_1.getInput)('GH_TOKEN', { required: true });
+    const message = (0, core_1.getInput)('COMMIT-MESSAGE', { required: true });
+    const branch = (0, core_1.getInput)('BRANCH');
+    const committerName = 'Buy Me a Coffee Readme action';
+    const committerEmail = 'noreply@buymeacoffeereadmeaction.com';
     return { token, message, branch, committerName, committerEmail };
 }
 exports.getActionOptions = getActionOptions;

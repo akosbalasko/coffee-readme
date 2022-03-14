@@ -36,11 +36,12 @@ export function getPathsToUpdate(): string {
 }
 
 export function getActionOptions(): UpdaterOptions {
-	const token = getInput('github-token', { required: true });
-	const message = getInput('commit-msg', { required: true });
-	const branch = getInput('branch');
-	const committerName = getInput('committer-name');
-	const committerEmail = getInput('committer-email');
+	const token = getInput('GH_TOKEN', { required: true });
+	const message = getInput('COMMIT-MESSAGE', { required: true });
+	const branch = getInput('BRANCH');
+	const committerName = 'Buy Me a Coffee Readme action';
+	const committerEmail = 'noreply@buymeacoffeereadmeaction.com';
+
 
 	return { token, message, branch, committerName, committerEmail };
 }

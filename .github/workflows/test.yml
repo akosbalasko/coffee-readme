@@ -23,6 +23,5 @@ jobs:
         with:
           BUY-ME-A-COFFEE-TOKEN: ${{ secrets.BUY_ME_A_COFFEE_TOKEN }}
           REPOSITORY: ${{github.repository}}
-          GH-TOKEN: ${{ github.token }}
           NUMBER-OF-MESSAGES: 3
 

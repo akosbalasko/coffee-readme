@@ -22,7 +22,7 @@ inputs:
     default: "Buy me a Coffee messages updated"
     required: false
 
-  NUMBER-OF-MESSAGES: 
+  NUMBER_OF_MESSAGES: 
     description: 'Number of the messages to show'
     default: 3
 

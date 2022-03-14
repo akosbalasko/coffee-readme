@@ -64,8 +64,8 @@ function run() {
             const messages = supporters.data.slice(0, numberOfMessages).map((supporter) => supporter.support_note).join('\n');
             const updateRegexp = new RegExp(`${PLACEHOLDER_START}[^\<]*${PLACEHOLDER_END}`, 'g');
             const updatedReadme = decodedReadme.replace(updateRegexp, `${PLACEHOLDER_START}${messages}${PLACEHOLDER_END}`);
-            fs.writeFileSync('readme.md', updatedReadme);
-            // await updater.updateFile('readme.md');
+            fs.writeFileSync(readme.data.path, updatedReadme);
+            yield updater.updateFile(readme.data.path);
         }
         catch (error) {
             if (error instanceof Error)

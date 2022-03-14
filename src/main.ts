@@ -33,9 +33,9 @@ async function run(): Promise<void> {
 
     const updateRegexp = new RegExp(`${PLACEHOLDER_START}[^\<]*${PLACEHOLDER_END}`, 'g');
     const updatedReadme = decodedReadme.replace(updateRegexp, `${PLACEHOLDER_START}${messages}${PLACEHOLDER_END}`);
-    fs.writeFileSync('readme.md', updatedReadme);
+    fs.writeFileSync(readme.data.path, updatedReadme);
 
-    // await updater.updateFile('readme.md');
+    await updater.updateFile(readme.data.path);
 
 } catch (error) {
   if (error instanceof Error) core.setFailed(error.message);

@@ -25,7 +25,8 @@ async function run(): Promise<void> {
     const octokit = github.getOctokit(octoToken);
     console.debug('github connection establised.')
     const readme = await octokit.rest.repos.getReadme({ owner: repo.split('/')[0], repo: repo.split('/')[1]});
-    const decodedReadme = readme.data.content;
+    let buff = new Buffer(readme.data.content, 'base64');
+    let decodedReadme = buff.toString('ascii');
     const options = getActionOptions();
     const updater = new Updater(options);
     const numberOfMessages = core.getInput('NUMBER_OF_MESSAGES');

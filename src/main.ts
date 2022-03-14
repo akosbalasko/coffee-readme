@@ -14,12 +14,16 @@ const coffeeAPI = require('buymeacoffee.js');
 async function run(): Promise<void> {
   try {
     const repo = core.getInput('REPOSITORY');
+    console.debug('started, getting buyme token...')
     let coffeeToken = core.getInput('BUY-ME-A-COFFEE-TOKEN');
     const coffee = new coffeeAPI(coffeeToken); // add your token here
+    console.debug('coffeeAPI connection established.')
     const supporters = await coffee.Supporters();
 
+    console.debug('getting github token')
     const octoToken = core.getInput('GH_TOKEN');
     const octokit = github.getOctokit(octoToken);
+    console.debug('github connection establised.')
     const readme = await octokit.rest.repos.getReadme({ owner: repo.split('/')[0], repo: repo.split('/')[1]});
     const decodedReadme = readme.data.content;
     const options = getActionOptions();

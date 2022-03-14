@@ -24,4 +24,5 @@ jobs:
           BUY-ME-A-COFFEE-TOKEN: ${{ secrets.BUY_ME_A_COFFEE_TOKEN }}
           REPOSITORY: ${{github.repository}}
           NUMBER-OF-MESSAGES: 3
+          GH_TOKEN: ${{ github.token }}
 

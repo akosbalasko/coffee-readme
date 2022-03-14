@@ -21,9 +21,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          BUY-ME-A-COFFEE-TOKEN: ${{ secrets.BUY_ME_A_COFFEE_TOKEN }}
+          BUY_ME_A_COFFEE_TOKEN: ${{ secrets.BUY_ME_A_COFFEE_TOKEN }}
           REPOSITORY: ${{github.repository}}
-          NUMBER-OF-MESSAGES: 3
+          NUMBER_OF_MESSAGES: 3
           GH_TOKEN: ${{ github.token }}
           COMMIT_MESSAGE: 'Buy me a Coffee messages updated'
           BRANCH: main

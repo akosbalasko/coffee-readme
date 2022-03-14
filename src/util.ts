@@ -37,7 +37,7 @@ export function getPathsToUpdate(): string {
 
 export function getActionOptions(): UpdaterOptions {
 	const token = getInput('GH_TOKEN', { required: true });
-	const message = getInput('COMMIT-MESSAGE', { required: true });
+	const message = getInput('COMMIT_MESSAGE', { required: true });
 	const branch = getInput('BRANCH');
 	const committerName = 'Buy Me a Coffee Readme action';
 	const committerEmail = 'noreply@buymeacoffeereadmeaction.com';

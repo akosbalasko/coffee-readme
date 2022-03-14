@@ -15,7 +15,7 @@ async function run(): Promise<void> {
   try {
     const repo = core.getInput('REPOSITORY');
     console.debug('started, getting buyme token...')
-    let coffeeToken = core.getInput('BUY-ME-A-COFFEE-TOKEN');
+    let coffeeToken = core.getInput('BUY_ME_A_COFFEE_TOKEN');
     const coffee = new coffeeAPI(coffeeToken); // add your token here
     console.debug('coffeeAPI connection established.')
     const supporters = await coffee.Supporters();
@@ -28,7 +28,7 @@ async function run(): Promise<void> {
     const decodedReadme = readme.data.content;
     const options = getActionOptions();
     const updater = new Updater(options);
-    const numberOfMessages = core.getInput('NUMBER-OF-MESSAGES');
+    const numberOfMessages = core.getInput('NUMBER_OF_MESSAGES');
     const messages = supporters.data.slice(0,numberOfMessages).map((supporter:any) => supporter.support_note).join('\n');
 
     const updateRegexp = new RegExp(`${PLACEHOLDER_START}[^\<]*${PLACEHOLDER_END}`, 'g');

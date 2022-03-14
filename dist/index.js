@@ -48,7 +48,7 @@ function run() {
         try {
             const repo = core.getInput('REPOSITORY');
             console.debug('started, getting buyme token...');
-            let coffeeToken = core.getInput('BUY-ME-A-COFFEE-TOKEN');
+            let coffeeToken = core.getInput('BUY_ME_A_COFFEE_TOKEN');
             const coffee = new coffeeAPI(coffeeToken); // add your token here
             console.debug('coffeeAPI connection established.');
             const supporters = yield coffee.Supporters();
@@ -60,7 +60,7 @@ function run() {
             const decodedReadme = readme.data.content;
             const options = (0, util_1.getActionOptions)();
             const updater = new updateFile_1.Updater(options);
-            const numberOfMessages = core.getInput('NUMBER-OF-MESSAGES');
+            const numberOfMessages = core.getInput('NUMBER_OF_MESSAGES');
             const messages = supporters.data.slice(0, numberOfMessages).map((supporter) => supporter.support_note).join('\n');
             const updateRegexp = new RegExp(`${PLACEHOLDER_START}[^\<]*${PLACEHOLDER_END}`, 'g');
             const updatedReadme = decodedReadme.replace(updateRegexp, `${PLACEHOLDER_START}${messages}${PLACEHOLDER_END}`);
@@ -272,7 +272,7 @@ function getPathsToUpdate() {
 exports.getPathsToUpdate = getPathsToUpdate;
 function getActionOptions() {
     const token = (0, core_1.getInput)('GH_TOKEN', { required: true });
-    const message = (0, core_1.getInput)('COMMIT-MESSAGE', { required: true });
+    const message = (0, core_1.getInput)('COMMIT_MESSAGE', { required: true });
     const branch = (0, core_1.getInput)('BRANCH');
     const committerName = 'Buy Me a Coffee Readme action';
     const committerEmail = 'noreply@buymeacoffeereadmeaction.com';

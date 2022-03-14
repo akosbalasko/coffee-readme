@@ -3,7 +3,7 @@ author: 'Akos Balasko'
 description: ''
 
 inputs:
-  BUY-ME-A-COFFEE-TOKEN:  # id of input
+  BUY_ME_A_COFFEE_TOKEN:  # id of input
     description: 'Your Buy me a coffee token'
     required: true
   

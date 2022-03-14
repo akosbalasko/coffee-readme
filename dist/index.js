@@ -47,21 +47,19 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const repo = core.getInput('REPOSITORY');
-            let coffeeToken = core.getInput('buy-me-a-coffee-token');
+            let coffeeToken = core.getInput('BUY-ME-A-COFFEE-TOKEN');
+            const coffee = new coffeeAPI(coffeeToken); // add your token here
+            const supporters = yield coffee.Supporters();
             const octokit = github.getOctokit(coffeeToken);
             const readme = yield octokit.rest.repos.getReadme({ owner: repo.split('/')[0], repo: repo.split('/')[1] });
             const decodedReadme = readme.data.content;
             const options = (0, util_1.getActionOptions)();
             const updater = new updateFile_1.Updater(options);
-            const numberOfMessages = core.getInput('number-of-messages');
-            const coffee = new coffeeAPI(coffeeToken); // add your token here
-            core.getInput('number-of-messages');
-            const supporters = yield coffee.Supporters();
-            console.log(`supporters: ${JSON.stringify(supporters.data)}`);
+            const numberOfMessages = core.getInput('NUMBER-OF-MESSAGES');
             const messages = supporters.data.slice(0, numberOfMessages).map((supporter) => supporter.support_note).join('\n');
             const updateRegexp = new RegExp(`${PLACEHOLDER_START}[^\<]*${PLACEHOLDER_END}`, 'g');
             const updatedReadme = decodedReadme.replace(updateRegexp, `${PLACEHOLDER_START}${messages}${PLACEHOLDER_END}`);
-            fs.writeFileSync('readme.md', `${decodedReadme}`);
+            fs.writeFileSync('readme.md', updatedReadme);
             // await updater.updateFile('readme.md');
         }
         catch (error) {
@@ -112,11 +110,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Updater = void 0;
 const fs_1 = __nccwpck_require__(5747);
-const util_1 = __nccwpck_require__(1669);
 /// import { GitHub } from '@actions/github/lib/utils';
 const github_1 = __nccwpck_require__(5438);
 const github = __importStar(__nccwpck_require__(5438));
-const readFileAsync = (0, util_1.promisify)(fs_1.readFile);
 class Updater {
     constructor(options) {
         this.octokit = github.getOctokit(options.token);
@@ -205,7 +201,7 @@ class Updater {
     getLocalContents(filePath) {
         return __awaiter(this, void 0, void 0, function* () {
             if ((0, fs_1.existsSync)(filePath)) {
-                return (yield readFileAsync(filePath)).toString('base64');
+                return (yield (0, fs_1.readFileSync)(filePath)).toString('base64');
             }
             return null;
         });

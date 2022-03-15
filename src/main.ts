@@ -41,7 +41,7 @@ async function run(): Promise<void> {
     const numberOfMessages = Number(core.getInput('NUMBER_OF_MESSAGES'));
     const messages = supporters.data.slice(0,numberOfMessages).map((supporter:any) => generateMessageLine(supporter)).join('\n');
 
-    const updateRegexp = new RegExp(`${PLACEHOLDER_START}[^\<]*${PLACEHOLDER_END}`, 'g');
+    const updateRegexp = new RegExp(`(?<=${escapeRegExp(PLACEHOLDER_START)})(.*)(?=${escapeRegExp(PLACEHOLDER_END)})`, 'g');
     const updatedReadme = decodedReadme.replace(updateRegexp, `${PLACEHOLDER_START}${messages}${PLACEHOLDER_END}`);
     fs.writeFileSync(readme.data.path, updatedReadme);
 
@@ -63,4 +63,8 @@ export const generateMessageLine = (supporter: CoffeeSupporter): string => {
   
 
 }
+
+const escapeRegExp = (text: string): string =>  {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+};
 run()

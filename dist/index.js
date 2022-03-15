@@ -64,7 +64,7 @@ function run() {
             const updater = new updateFile_1.Updater(options);
             const numberOfMessages = Number(core.getInput('NUMBER_OF_MESSAGES'));
             const messages = supporters.data.slice(0, numberOfMessages).map((supporter) => (0, exports.generateMessageLine)(supporter)).join('\n');
-            const updateRegexp = new RegExp(`${PLACEHOLDER_START}[^\<]*${PLACEHOLDER_END}`, 'g');
+            const updateRegexp = new RegExp(`(?<=${escapeRegExp(PLACEHOLDER_START)})(.*)(?=${escapeRegExp(PLACEHOLDER_END)})`, 'g');
             const updatedReadme = decodedReadme.replace(updateRegexp, `${PLACEHOLDER_START}${messages}${PLACEHOLDER_END}`);
             fs.writeFileSync(readme.data.path, updatedReadme);
             yield updater.updateFile(readme.data.path);
@@ -84,6 +84,9 @@ const generateMessageLine = (supporter) => {
     return `${coffees} from ${supporter.payer_name} <div>${supporter.support_note}</div>`;
 };
 exports.generateMessageLine = generateMessageLine;
+const escapeRegExp = (text) => {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+};
 run();
 
 

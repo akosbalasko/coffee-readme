@@ -35,6 +35,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.generateMessageLine = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const fs = __importStar(__nccwpck_require__(5747));
@@ -61,8 +62,8 @@ function run() {
             let decodedReadme = buff.toString('ascii');
             const options = (0, util_1.getActionOptions)();
             const updater = new updateFile_1.Updater(options);
-            const numberOfMessages = core.getInput('NUMBER_OF_MESSAGES');
-            const messages = supporters.data.slice(0, numberOfMessages).map((supporter) => supporter.support_note).join('\n');
+            const numberOfMessages = Number(core.getInput('NUMBER_OF_MESSAGES'));
+            const messages = supporters.data.slice(0, numberOfMessages).map((supporter) => (0, exports.generateMessageLine)(supporter)).join('\n');
             const updateRegexp = new RegExp(`${PLACEHOLDER_START}[^\<]*${PLACEHOLDER_END}`, 'g');
             const updatedReadme = decodedReadme.replace(updateRegexp, `${PLACEHOLDER_START}${messages}${PLACEHOLDER_END}`);
             fs.writeFileSync(readme.data.path, updatedReadme);
@@ -74,6 +75,14 @@ function run() {
         }
     });
 }
+const generateMessageLine = (supporter) => {
+    let coffees = '';
+    for (let i = 0; i < supporter.support_coffees; ++i) {
+        coffees += '<img src="./../assets/bmc-logo.png" width="30">';
+    }
+    return `${coffees} ${supporter.support_note}`;
+};
+exports.generateMessageLine = generateMessageLine;
 run();
 
 

@@ -8,6 +8,13 @@ import { getActionOptions } from './util';
 const PLACEHOLDER_START = '<!--START_SECTION:buy-me-a-coffee-->';
 const PLACEHOLDER_END = '<!--END_SECTION:buy-me-a-coffe-->';
 
+interface CoffeeSupporter {
+  support_note: string;
+  support_coffees: number;
+}
+interface CoffeeSupportersResponse {
+  data: Array<CoffeeSupporter>;
+}
 
 const coffeeAPI = require('buymeacoffee.js');
 
@@ -18,7 +25,8 @@ async function run(): Promise<void> {
     let coffeeToken = core.getInput('BUY_ME_A_COFFEE_TOKEN');
     const coffee = new coffeeAPI(coffeeToken); // add your token here
     console.debug('coffeeAPI connection established.')
-    const supporters = await coffee.Supporters();
+    const supporters: CoffeeSupportersResponse = await coffee.Supporters();
+
 
     console.debug('getting github token')
     const octoToken = core.getInput('GH_TOKEN');
@@ -29,8 +37,8 @@ async function run(): Promise<void> {
     let decodedReadme = buff.toString('ascii');
     const options = getActionOptions();
     const updater = new Updater(options);
-    const numberOfMessages = core.getInput('NUMBER_OF_MESSAGES');
-    const messages = supporters.data.slice(0,numberOfMessages).map((supporter:any) => supporter.support_note).join('\n');
+    const numberOfMessages = Number(core.getInput('NUMBER_OF_MESSAGES'));
+    const messages = supporters.data.slice(0,numberOfMessages).map((supporter:any) => generateMessageLine(supporter)).join('\n');
 
     const updateRegexp = new RegExp(`${PLACEHOLDER_START}[^\<]*${PLACEHOLDER_END}`, 'g');
     const updatedReadme = decodedReadme.replace(updateRegexp, `${PLACEHOLDER_START}${messages}${PLACEHOLDER_END}`);
@@ -44,4 +52,14 @@ async function run(): Promise<void> {
 
 }
 
+export const generateMessageLine = (supporter: CoffeeSupporter): string => {
+  let coffees = '';
+  for (let i=0; i<supporter.support_coffees; ++i) {
+    coffees += '<img src="./../assets/bmc-logo.png" width="30">';
+  }
+
+  return `${coffees} ${supporter.support_note}`;
+  
+
+}
 run()

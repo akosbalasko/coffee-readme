@@ -34,15 +34,16 @@ async function run(): Promise<void> {
     const octokit = github.getOctokit(octoToken);
     console.debug('github connection establised.')
     const readme = await octokit.rest.repos.getReadme({ owner: repo.split('/')[0], repo: repo.split('/')[1]});
-    let buff = new Buffer(readme.data.content, 'base64');
+    let buff = Buffer.from(readme.data.content, 'base64');
     let decodedReadme = buff.toString('ascii');
     const options = getActionOptions();
     const updater = new Updater(options);
     const numberOfMessages = Number(core.getInput('NUMBER_OF_MESSAGES'));
     const messages = supporters.data.slice(0,numberOfMessages).map((supporter:any) => generateMessageLine(supporter)).join('\n');
 
-    const updateRegexp = new RegExp(`(?<=${escapeRegExp(PLACEHOLDER_START)})(.*)(?=${escapeRegExp(PLACEHOLDER_END)})`, 'g');
-    const updatedReadme = decodedReadme.replace(updateRegexp, `${PLACEHOLDER_START}${messages}${PLACEHOLDER_END}`);
+    
+    const updatedReadme = updateReadme(decodedReadme, messages);
+
     fs.writeFileSync(readme.data.path, updatedReadme);
 
     await updater.updateFile(readme.data.path);
@@ -53,18 +54,23 @@ async function run(): Promise<void> {
 
 }
 
+export const updateReadme = (readme: string, messages: string): string => {
+  //const str = `(?<=${PLACEHOLDER_START})(.*)(?=${PLACEHOLDER_END})`;
+  const str = `${PLACEHOLDER_START}[\\s\\S]+${PLACEHOLDER_END}`;
+  console.log(str);
+  const updateRegexp = new RegExp(str, 'g');
+  
+  return readme.replace(updateRegexp, `${PLACEHOLDER_START}${messages}${PLACEHOLDER_END}`);
+}
 export const generateMessageLine = (supporter: CoffeeSupporter): string => {
   let coffees = '<div>';
   for (let i=0; i < supporter.support_coffees; ++i) {
     coffees += '<img src="/assets/bmc-logo.png" width="30">';
   }
-  coffees += '</div>'
-  return `${coffees} from ${supporter.payer_name} <div>${supporter.support_note}</div>`;
+  coffees += ` from <b>${supporter.payer_name}</b> </div>`;
+  return `${coffees}  <div><i>${supporter.support_note}</i></div>`;
   
 
 }
 
-const escapeRegExp = (text: string): string =>  {
-  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-};
 run()

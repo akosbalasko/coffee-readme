@@ -11,6 +11,7 @@ const PLACEHOLDER_END = '<!--END_SECTION:buy-me-a-coffe-->';
 interface CoffeeSupporter {
   support_note: string;
   support_coffees: number;
+  payer_name: string;
 }
 interface CoffeeSupportersResponse {
   data: Array<CoffeeSupporter>;
@@ -53,12 +54,12 @@ async function run(): Promise<void> {
 }
 
 export const generateMessageLine = (supporter: CoffeeSupporter): string => {
-  let coffees = '';
+  let coffees = '<div>';
   for (let i=0; i < supporter.support_coffees; ++i) {
     coffees += '<img src="/assets/bmc-logo.png" width="30">';
   }
-
-  return `${coffees} ${supporter.support_note}`;
+  coffees += '</div>'
+  return `${coffees} from ${supporter.payer_name} <div>${supporter.support_note}</div>`;
   
 
 }

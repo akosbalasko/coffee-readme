@@ -54,8 +54,8 @@ async function run(): Promise<void> {
 
 export const generateMessageLine = (supporter: CoffeeSupporter): string => {
   let coffees = '';
-  for (let i=0; i<supporter.support_coffees; ++i) {
-    coffees += '<img src="./../assets/bmc-logo.png" width="30">';
+  for (let i=0; i < supporter.support_coffees; ++i) {
+    coffees += '<img src="/assets/bmc-logo.png" width="30">';
   }
 
   return `${coffees} ${supporter.support_note}`;

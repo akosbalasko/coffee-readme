@@ -68,7 +68,7 @@ export const generateMessageLine = (supporter: CoffeeSupporter): string => {
     coffees += '<img src="/assets/bmc-logo.png" width="30">';
   }
   coffees += ` from <b>${supporter.payer_name}</b> </div>`;
-  return `${coffees}  <div><i>${supporter.support_note}</i></div>`;
+  return `${coffees}  <div><i>${supporter.support_note}</i></div><br>`;
   
 
 }

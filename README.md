@@ -1,2 +1,3 @@
-<!--START_SECTION:buy-me-a-coffee-->
-<!--END_SECTION:buy-me-a-coffe-->
+<!--START_SECTION:buy-me-a-coffee-->Hi, some months ago I used your tool to migrate thousands of notes to Obsidian. You even fixed some issues I reported. I always meant to buy you some coffee but I almost forgot. But here I am. Thank you!
+I moved 1.000+ notes from Evernote to Obsidian. Yarle did a great job! Thanks for creating this tool!
+Thanks for the quick transfer!<!--END_SECTION:buy-me-a-coffe-->

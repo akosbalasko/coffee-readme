@@ -36,16 +36,16 @@ runs:
   steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/buy-me-a-coffee
-        with:
-          BUY_ME_A_COFFEE_TOKEN: ${{ inputs.BUY_ME_A_COFFEE_TOKEN }}
-          NUMBER_OF_MESSAGES: ${{ inputs.NUMBER_OF_MESSAGES }}
+      with:
+        BUY_ME_A_COFFEE_TOKEN: ${{ inputs.BUY_ME_A_COFFEE_TOKEN }}
+        NUMBER_OF_MESSAGES: ${{ inputs.NUMBER_OF_MESSAGES }}
     - uses: test-room-7/action-update-file@v1
-        with:
-          file-path: readme.md
-          commit-msg: Update resources
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          branch: ${{ inputs.BRANCH }}
+      with:
+        file-path: readme.md
+        commit-msg: Update resources
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        repository: ${{ github.repository }}
+        branch: ${{ inputs.BRANCH }}
 
 branding:
   icon: "info"

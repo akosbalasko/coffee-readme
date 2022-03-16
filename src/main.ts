@@ -41,12 +41,13 @@ async function run(): Promise<void> {
     const numberOfMessages = Number(core.getInput('NUMBER_OF_MESSAGES'));
     const messages = supporters.data.slice(0,numberOfMessages).map((supporter:any) => generateMessageLine(supporter)).join('\n');
 
-    
-    const updatedReadme = updateReadme(decodedReadme, messages);
+     const updatedReadme = updateReadme(decodedReadme, messages);
 
     fs.writeFileSync(readme.data.path, updatedReadme);
 
-    await updater.updateFile(readme.data.path);
+    // DIFFERENT ACTION:
+    
+    // await updater.updateFile(readme.data.path);
 
 } catch (error) {
   if (error instanceof Error) core.setFailed(error.message);

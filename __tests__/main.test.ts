@@ -9,7 +9,7 @@ import { updateReadme } from './../src/main';
 // shows how the runner will run a javascript action with env / stdout protocol
 test('test update readme regexp', () => {
 
-  const readme = '<!--START_SECTION:buy-me-a-coffee-->test test test<!--END_SECTION:buy-me-a-coffe-->';
+  const readme = '<!--START_SECTION:buy-me-a-coffee--><!--END_SECTION:buy-me-a-coffe-->';
   const updatedReadme = updateReadme(readme, 'updated messages');
   
     expect(updatedReadme).toBe('<!--START_SECTION:buy-me-a-coffee-->updated messages<!--END_SECTION:buy-me-a-coffe-->');

@@ -21,10 +21,6 @@ inputs:
     default: ${{ github.repository }}
     required: false
 
-output:
-  UPDATED_README:
-    description: 'the updated readme file'
-
 runs:
   using: 'node16'
   main: './../../../dist/index.js'

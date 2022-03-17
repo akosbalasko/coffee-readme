@@ -38,14 +38,10 @@ async function run(): Promise<void> {
     let decodedReadme = buff.toString('ascii');
     */
     const decodedReadme = fs.readFileSync('README.md', 'utf-8');
-    console.log(decodedReadme);
     const numberOfMessages = Number(core.getInput('NUMBER_OF_MESSAGES'));
     const messages = supporters.data.slice(0,numberOfMessages).map((supporter:any) => generateMessageLine(supporter)).join('\n');
-    console.log(messages);
     const updatedReadme = updateReadme(decodedReadme, messages);
 
-    console.log(updatedReadme);
-    core.setOutput('UPDATED_README', updatedReadme);
     fs.writeFileSync('README.md', updatedReadme);
 
     // DIFFERENT ACTION:
@@ -62,12 +58,10 @@ async function run(): Promise<void> {
 
 export const updateReadme = (readme: string, messages: string): string => {
   //const str = `(?<=${PLACEHOLDER_START})(.*)(?=${PLACEHOLDER_END})`;
-  const str = `${PLACEHOLDER_START}[\\s\\S]+${PLACEHOLDER_END}`;
+  const str = `${PLACEHOLDER_START}[\\s\\S]*${PLACEHOLDER_END}`;
   const updateRegexp = new RegExp(str, 'g');
   
-  const ret = readme.replace(updateRegexp, `${PLACEHOLDER_START}${messages}${PLACEHOLDER_END}`);
-  console.log('ret: ' + ret);
-  return ret;
+  return readme.replace(updateRegexp, `${PLACEHOLDER_START}${messages}${PLACEHOLDER_END}`);
 
 }
 export const generateMessageLine = (supporter: CoffeeSupporter): string => {

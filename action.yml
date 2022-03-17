@@ -36,6 +36,8 @@ runs:
   steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
+    - run: ls -la
+      shell: bash
     - uses: ./.github/actions/buy-me-a-coffee
       with:
         BUY_ME_A_COFFEE_TOKEN: ${{ inputs.BUY_ME_A_COFFEE_TOKEN }}

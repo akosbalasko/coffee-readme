@@ -39,6 +39,7 @@ runs:
       with:
         BUY_ME_A_COFFEE_TOKEN: ${{ inputs.BUY_ME_A_COFFEE_TOKEN }}
         NUMBER_OF_MESSAGES: ${{ inputs.NUMBER_OF_MESSAGES }}
+        GH_TOKEN: ${{ inputs.GH_TOKEN }}
     - uses: test-room-7/action-update-file@v1
       with:
         file-path: readme.md

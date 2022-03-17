@@ -3,6 +3,11 @@ author: 'Akos Balasko'
 description: ''
 
 inputs:
+  GH_TOKEN:
+    description: "GitHub access token with Repo scope"
+    default: ${{ github.token }}
+    required: true
+
   BUY_ME_A_COFFEE_TOKEN:  # id of input
     description: 'Your Buy me a coffee token'
     required: true

@@ -46,9 +46,9 @@ runs:
         file-path: readme.md
         commit-msg: Update resources
         github-token: ${{ inputs.GH_TOKEN }}
-        repository: ${{ github.repository }}
         branch: ${{ inputs.BRANCH }}
-
+	      committerName: 'Buy Me a Coffee Readme action';
+	      committerEmail: 'noreply@buymeacoffeereadmeaction.com';
 branding:
   icon: "info"
   color: "blue"

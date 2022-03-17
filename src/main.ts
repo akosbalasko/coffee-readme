@@ -43,6 +43,7 @@ async function run(): Promise<void> {
 
     const updatedReadme = updateReadme(decodedReadme, messages);
 
+    console.log(updatedReadme);
     core.setOutput('UPDATED_README', updatedReadme);
     fs.writeFileSync('README.md', updatedReadme);
 

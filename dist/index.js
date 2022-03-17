@@ -63,6 +63,7 @@ function run() {
             const numberOfMessages = Number(core.getInput('NUMBER_OF_MESSAGES'));
             const messages = supporters.data.slice(0, numberOfMessages).map((supporter) => (0, exports.generateMessageLine)(supporter)).join('\n');
             const updatedReadme = (0, exports.updateReadme)(decodedReadme, messages);
+            console.log(updatedReadme);
             core.setOutput('UPDATED_README', updatedReadme);
             fs.writeFileSync('README.md', updatedReadme);
             // DIFFERENT ACTION:

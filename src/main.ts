@@ -36,8 +36,7 @@ async function run(): Promise<void> {
     const readme = await octokit.rest.repos.getReadme({ owner: repo.split('/')[0], repo: repo.split('/')[1]});
     let buff = Buffer.from(readme.data.content, 'base64');
     let decodedReadme = buff.toString('ascii');
-    const options = getActionOptions();
-    const updater = new Updater(options);
+
     const numberOfMessages = Number(core.getInput('NUMBER_OF_MESSAGES'));
     const messages = supporters.data.slice(0,numberOfMessages).map((supporter:any) => generateMessageLine(supporter)).join('\n');
 
@@ -46,9 +45,11 @@ async function run(): Promise<void> {
     fs.writeFileSync(readme.data.path, updatedReadme);
 
     // DIFFERENT ACTION:
-    
-    // await updater.updateFile(readme.data.path);
-
+    /*
+      const options = getActionOptions();
+      const updater = new Updater(options);
+     await updater.updateFile(readme.data.path);
+    */
 } catch (error) {
   if (error instanceof Error) core.setFailed(error.message);
 }

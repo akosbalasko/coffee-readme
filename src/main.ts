@@ -37,10 +37,11 @@ async function run(): Promise<void> {
     let buff = Buffer.from(readme.data.content, 'base64');
     let decodedReadme = buff.toString('ascii');
     */
-    const decodedReadme = fs.readFileSync('README.md', 'ascii');
+    const decodedReadme = fs.readFileSync('README.md', 'utf-8');
+    console.log(decodedReadme);
     const numberOfMessages = Number(core.getInput('NUMBER_OF_MESSAGES'));
     const messages = supporters.data.slice(0,numberOfMessages).map((supporter:any) => generateMessageLine(supporter)).join('\n');
-
+    console.log(messages);
     const updatedReadme = updateReadme(decodedReadme, messages);
 
     console.log(updatedReadme);

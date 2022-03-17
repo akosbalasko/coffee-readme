@@ -47,8 +47,9 @@ runs:
         commit-msg: Update resources
         github-token: ${{ inputs.GH_TOKEN }}
         branch: ${{ inputs.BRANCH }}
-        committerName: Buy Me a Coffee Readme action
-	      committerEmail: noreply@buymeacoffeereadmeaction.com
+        committer-name: Buy Me a Coffee Readme action
+        committer-email: noreply@buymeacoffeereadmeaction.com
+
 branding:
   icon: "info"
   color: "blue"

@@ -22,8 +22,8 @@ inputs:
     required: false
 
 output:
-  MESSAGES_HTML:
-    description: 'The latest X messages formatted'
+  UPDATED_README:
+    description: 'the updated readme file'
 
 runs:
   using: 'node16'

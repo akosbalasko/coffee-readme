@@ -28,7 +28,7 @@ async function run(): Promise<void> {
     console.debug('coffeeAPI connection established.')
     const supporters: CoffeeSupportersResponse = await coffee.Supporters();
 
-
+    /*
     console.debug('getting github token')
     const octoToken = core.getInput('GH_TOKEN');
     const octokit = github.getOctokit(octoToken);
@@ -36,13 +36,15 @@ async function run(): Promise<void> {
     const readme = await octokit.rest.repos.getReadme({ owner: repo.split('/')[0], repo: repo.split('/')[1]});
     let buff = Buffer.from(readme.data.content, 'base64');
     let decodedReadme = buff.toString('ascii');
-
+    */
+    const decodedReadme = fs.readFileSync('readme.md', 'ascii');
     const numberOfMessages = Number(core.getInput('NUMBER_OF_MESSAGES'));
     const messages = supporters.data.slice(0,numberOfMessages).map((supporter:any) => generateMessageLine(supporter)).join('\n');
 
-     const updatedReadme = updateReadme(decodedReadme, messages);
+    const updatedReadme = updateReadme(decodedReadme, messages);
 
-    fs.writeFileSync(readme.data.path, updatedReadme);
+    core.setOutput('UPDATED_README', updatedReadme);
+    fs.writeFileSync('readme.md', updatedReadme);
 
     // DIFFERENT ACTION:
     /*

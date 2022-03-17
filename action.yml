@@ -17,6 +17,10 @@ inputs:
     default: ${{ github.repository }}
     required: false
 
+  README:
+    description: "Case sensitive name of your readme.md "
+    default: "README.md"
+
   COMMIT_MESSAGE:
     description: "Add a commit message of your choice"
     default: "Buy me a Coffee messages updated"
@@ -42,12 +46,11 @@ runs:
       with:
         BUY_ME_A_COFFEE_TOKEN: ${{ inputs.BUY_ME_A_COFFEE_TOKEN }}
         NUMBER_OF_MESSAGES: ${{ inputs.NUMBER_OF_MESSAGES }}
-        GH_TOKEN: ${{ inputs.GH_TOKEN }}
-        REPOSITORY: ${{ inputs.REPOSITORY }}
+        README: ${{ inputs.README }}
     - uses: test-room-7/action-update-file@v1
       with:
-        file-path: README.md
-        commit-msg: Update resources
+        file-path: ${{ inputs.README }}
+        commit-msg: ${{ inputs.COMMIT_MESSAGE }}
         github-token: ${{ inputs.GH_TOKEN }}
         branch: ${{ inputs.BRANCH }}
         committer-name: Buy Me a Coffee Readme action

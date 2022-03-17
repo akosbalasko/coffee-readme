@@ -34,42 +34,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.generateMessageLine = exports.updateReadme = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const fs = __importStar(__nccwpck_require__(5747));
+const buymeacoffee_js_1 = __importDefault(__nccwpck_require__(5807));
 const PLACEHOLDER_START = '<!--START_SECTION:buy-me-a-coffee-->';
 const PLACEHOLDER_END = '<!--END_SECTION:buy-me-a-coffe-->';
-const coffeeAPI = __nccwpck_require__(5807);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const repo = core.getInput('REPOSITORY');
-            console.debug('started, getting buyme token...');
-            let coffeeToken = core.getInput('BUY_ME_A_COFFEE_TOKEN');
-            const coffee = new coffeeAPI(coffeeToken); // add your token here
-            console.debug('coffeeAPI connection established.');
+            const readmeFileName = core.getInput('README');
+            core.debug('started, getting buyme token...');
+            const coffeeToken = core.getInput('BUY_ME_A_COFFEE_TOKEN');
+            const coffee = new buymeacoffee_js_1.default(coffeeToken);
+            core.debug('coffeeAPI connection established.');
             const supporters = yield coffee.Supporters();
-            /*
-            console.debug('getting github token')
-            const octoToken = core.getInput('GH_TOKEN');
-            const octokit = github.getOctokit(octoToken);
-            console.debug('github connection establised.')
-            const readme = await octokit.rest.repos.getReadme({ owner: repo.split('/')[0], repo: repo.split('/')[1]});
-            let buff = Buffer.from(readme.data.content, 'base64');
-            let decodedReadme = buff.toString('ascii');
-            */
-            const decodedReadme = fs.readFileSync('README.md', 'utf-8');
+            const decodedReadme = fs.readFileSync(readmeFileName, 'utf-8');
             const numberOfMessages = Number(core.getInput('NUMBER_OF_MESSAGES'));
-            const messages = supporters.data.slice(0, numberOfMessages).map((supporter) => (0, exports.generateMessageLine)(supporter)).join('\n');
+            const messages = supporters.data
+                .slice(0, numberOfMessages)
+                .map((supporter) => (0, exports.generateMessageLine)(supporter))
+                .join('\n');
             const updatedReadme = (0, exports.updateReadme)(decodedReadme, messages);
-            fs.writeFileSync('README.md', updatedReadme);
-            // DIFFERENT ACTION:
-            /*
-              const options = getActionOptions();
-              const updater = new Updater(options);
-             await updater.updateFile(readme.data.path);
-            */
+            fs.writeFileSync(readmeFileName, updatedReadme);
         }
         catch (error) {
             if (error instanceof Error)
@@ -78,7 +69,6 @@ function run() {
     });
 }
 const updateReadme = (readme, messages) => {
-    //const str = `(?<=${PLACEHOLDER_START})(.*)(?=${PLACEHOLDER_END})`;
     const str = `${PLACEHOLDER_START}[\\s\\S]*${PLACEHOLDER_END}`;
     const updateRegexp = new RegExp(str, 'g');
     return readme.replace(updateRegexp, `${PLACEHOLDER_START}${messages}${PLACEHOLDER_END}`);

@@ -1,8 +1,8 @@
 {
   "name": "coffee-readme",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
-  "description": "This action grabs your messages written by your supporters on Buy Me A Coffee, and updates your Readme.md",
+  "description": "This action grabs the latest x messages written by your supporters on Buy Me A Coffee, and updates your Readme.md with them.",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -24,7 +24,7 @@
     "node",
     "setup"
   ],
-  "author": "",
+  "author": "Akos Balasko <akos0215@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "1.6.0",

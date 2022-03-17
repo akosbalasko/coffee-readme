@@ -3,10 +3,6 @@ author: 'Akos Balasko'
 description: ''
 
 inputs:
-  GH_TOKEN:
-    description: "GitHub access token with Repo scope"
-    default: ${{ github.token }}
-    required: true
 
   BUY_ME_A_COFFEE_TOKEN:  # id of input
     description: 'Your Buy me a coffee token'
@@ -16,11 +12,9 @@ inputs:
     description: 'Number of the messages to show'
     default: 3
 
-  REPOSITORY:
-    description: "Your GitHub repository"
-    default: ${{ github.repository }}
-    required: false
-
+  README:
+    description: "Case sensitive name of your readme.md "
+    default: "README.md"
 runs:
   using: 'node16'
   main: './../../../dist/index.js'

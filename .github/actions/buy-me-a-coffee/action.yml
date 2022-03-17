@@ -16,6 +16,11 @@ inputs:
     description: 'Number of the messages to show'
     default: 3
 
+  REPOSITORY:
+    description: "Your GitHub repository"
+    default: ${{ github.repository }}
+    required: false
+
 output:
   MESSAGES_HTML:
     description: 'The latest X messages formatted'

@@ -39,7 +39,7 @@ runs:
   using: 'composite'
   steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
+    - uses: actions/setup-node@v3
     - run: ls -la
       shell: bash
     - uses: ./.github/actions/buy-me-a-coffee

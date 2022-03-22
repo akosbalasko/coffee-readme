@@ -1,6 +1,6 @@
 name: 'Buy me a coffee messages -> Readme'
 author: 'Akos Balasko'
-description: 'Your Buy Me A Coffee Donations and Messages pushed into your project\'s Readme.md'
+description: 'Your Buy Me A Coffee Donations and Messages pushed into your Readme.md'
 
 inputs:
   BUY_ME_A_COFFEE_TOKEN:  # id of input
@@ -53,4 +53,4 @@ runs:
 
 branding:
   icon: "award"
-  color: "yellow"
+  color: "blue"

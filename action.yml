@@ -1,10 +1,10 @@
 name: 'Buy me a coffee messages -> Readme'
 author: 'Akos Balasko'
-description: ''
+description: 'Your Buy Me A Coffee Donations and Messages pushed into your project's Readme.md'
 
 inputs:
   BUY_ME_A_COFFEE_TOKEN:  # id of input
-    description: 'Your Buy me a coffee token'
+    description: 'Your Buy Me A Coffee token'
     required: true
   
   GH_TOKEN:
@@ -52,5 +52,5 @@ runs:
         committer-email: noreply@buymeacoffeereadmeaction.com
 
 branding:
-  icon: "info"
-  color: "blue"
+  icon: "award"
+  color: "yellow"

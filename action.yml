@@ -37,7 +37,7 @@ runs:
     - uses: actions/setup-node@v3
     - run: ls -la
       shell: bash
-    - uses: akosbalasko/coffee-to-file@1.0.0
+    - uses: akosbalasko/coffee-to-file@1.0.1
       with:
         BUY_ME_A_COFFEE_TOKEN: ${{ inputs.BUY_ME_A_COFFEE_TOKEN }}
         NUMBER_OF_MESSAGES: ${{ inputs.NUMBER_OF_MESSAGES }}

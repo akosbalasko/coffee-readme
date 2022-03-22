@@ -54,7 +54,7 @@ These lines won't be shown in the generated Readme file (because they are commen
        name: Update Buy Me A Coffee section in this repo's README
        runs-on: ubuntu-latest
        steps:
-         - uses: akosbalasko/coffee-readme@master
+         - uses: akosbalasko/coffee-readme@main
            with:
              BUY_ME_A_COFFEE_TOKEN: ${{ secrets.BUY_ME_A_COFFEE_TOKEN }}
              GH_TOKEN: ${{secrets.GITHUB_TOKEN }}

@@ -1,4 +1,4 @@
-name: 'Buy me a coffee messages -> Readme'
+name: 'Coffee-Readme'
 author: 'Akos Balasko'
 description: 'Your Buy Me A Coffee Donations and Messages pushed into your Readme.md'
 
@@ -53,4 +53,4 @@ runs:
 
 branding:
   icon: "award"
-  color: "blue"
+  color: "yellow"

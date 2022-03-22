@@ -12,11 +12,6 @@ inputs:
     default: ${{ github.token }}
     required: true
 
-  REPOSITORY:
-    description: "Your GitHub repository"
-    default: ${{ github.repository }}
-    required: false
-
   README:
     description: "Case sensitive name of your readme.md "
     default: "README.md"
@@ -42,11 +37,11 @@ runs:
     - uses: actions/setup-node@v1
     - run: ls -la
       shell: bash
-    - uses: ./.github/actions/buy-me-a-coffee
+    - uses: akosbalasko/coffee-to-file@v1
       with:
         BUY_ME_A_COFFEE_TOKEN: ${{ inputs.BUY_ME_A_COFFEE_TOKEN }}
         NUMBER_OF_MESSAGES: ${{ inputs.NUMBER_OF_MESSAGES }}
-        README: ${{ inputs.README }}
+        FILENAME: ${{ inputs.README }}
     - uses: test-room-7/action-update-file@v1
       with:
         file-path: ${{ inputs.README }}
